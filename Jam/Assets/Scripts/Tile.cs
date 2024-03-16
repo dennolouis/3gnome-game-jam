@@ -40,36 +40,42 @@ public class Tile : MonoBehaviour
         transform.position = slotNow.transform.position;
     }
 
-    void SpawnSlots()
+    public void SpawnSlots()
     {
         Ray lRay;
         Ray rRay;
         Ray uRay;
         Ray dRay;
+        float maxDistance = 1;
 
         lRay = new Ray(transform.position, Vector3.left);
         rRay = new Ray(transform.position, Vector3.right);
         uRay = new Ray(transform.position, Vector3.up);
         dRay = new Ray(transform.position, Vector3.down);
 
-        if(Physics.Raycast(lRay, out RaycastHit hit1))
+        if(Physics.Raycast(lRay, out RaycastHit hit1, maxDistance))
         {
             Instantiate(slotNow, new Vector3(transform.position.x -3, transform.position.y, transform.position.z), Quaternion.identity);
         }
 
-        if (Physics.Raycast(rRay, out RaycastHit hit2))
+        if (Physics.Raycast(rRay, out RaycastHit hit2, maxDistance))
         {
             Instantiate(slotNow, new Vector3(transform.position.x + 3, transform.position.y, transform.position.z), Quaternion.identity);
         }
 
-        if (Physics.Raycast(uRay, out RaycastHit hit3))
+        if (Physics.Raycast(uRay, out RaycastHit hit3, maxDistance))
         {
             Instantiate(slotNow, new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), Quaternion.identity);
         }
 
-        if (Physics.Raycast(lRay, out RaycastHit hit4))
+        if (Physics.Raycast(dRay, out RaycastHit hit4, maxDistance))
         {
             Instantiate(slotNow, new Vector3(transform.position.x, transform.position.y - 3, transform.position.z), Quaternion.identity);
         }
+    }
+
+    public void FetchInfo()
+    {
+
     }
 }
