@@ -406,7 +406,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: (This is where you will put some basic instructions)
+  m_text: Every tile that you don't activate each turn is destroyed at the end of
+    it. Most activations require tiles of specific colors to be adjacent. Black and
+    white tiles count as having no color. If you can't activate a black tile it will
+    destroy all tiles of the same type regardless of color. Each turn you choose
+    3 out of 5 tiles to play.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 955b552f3d646514da87c880813d91ea, type: 2}
   m_sharedMaterial: {fileID: -1022368184911120757, guid: 955b552f3d646514da87c880813d91ea, type: 2}
