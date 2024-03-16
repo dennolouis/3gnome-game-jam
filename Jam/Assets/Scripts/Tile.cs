@@ -1,12 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Tile : MonoBehaviour
 {
     [SerializeField] GameObject slotNow;
     GameObject slotPrevious;
     [SerializeField] GameObject slotPrefab;
+    Color color;
+    [SerializeField] GameObject gm;
+    float maxDistance = 1;
+
+    void Awake()
+    {
+        gm.GetComponent<GameManager>().activations += QuickActivation;
+
+        int randNumber = UnityEngine.Random.Range(1, 4);
+
+        if(randNumber == 1)
+        {
+            color = Color.red;
+        }
+
+        if (randNumber == 2)
+        {
+            color = Color.green;
+        }
+
+        if (randNumber == 3)
+        {
+            color = Color.blue;
+        }
+
+        if (randNumber == 4)
+        {
+            color = Color.yellow;
+        }
+    }
 
     IEnumerator FollowMouse()
     {
@@ -46,36 +77,47 @@ public class Tile : MonoBehaviour
         Ray rRay;
         Ray uRay;
         Ray dRay;
-        float maxDistance = 1;
 
         lRay = new Ray(transform.position, Vector3.left);
         rRay = new Ray(transform.position, Vector3.right);
         uRay = new Ray(transform.position, Vector3.up);
         dRay = new Ray(transform.position, Vector3.down);
 
-        if(Physics.Raycast(lRay, out RaycastHit hit1, maxDistance))
+        if(!Physics.Raycast(lRay, out RaycastHit hit1, maxDistance))
         {
-            Instantiate(slotNow, new Vector3(transform.position.x -3, transform.position.y, transform.position.z), Quaternion.identity);
+            Instantiate(slotPrefab, new Vector3(transform.position.x -3, transform.position.y, transform.position.z), Quaternion.identity);
         }
 
-        if (Physics.Raycast(rRay, out RaycastHit hit2, maxDistance))
+        if (!Physics.Raycast(rRay, out RaycastHit hit2, maxDistance))
         {
-            Instantiate(slotNow, new Vector3(transform.position.x + 3, transform.position.y, transform.position.z), Quaternion.identity);
+            Instantiate(slotPrefab, new Vector3(transform.position.x + 3, transform.position.y, transform.position.z), Quaternion.identity);
         }
 
-        if (Physics.Raycast(uRay, out RaycastHit hit3, maxDistance))
+        if (!Physics.Raycast(uRay, out RaycastHit hit3, maxDistance))
         {
-            Instantiate(slotNow, new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), Quaternion.identity);
+            Instantiate(slotPrefab, new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), Quaternion.identity);
         }
 
-        if (Physics.Raycast(dRay, out RaycastHit hit4, maxDistance))
+        if (!Physics.Raycast(dRay, out RaycastHit hit4, maxDistance))
         {
-            Instantiate(slotNow, new Vector3(transform.position.x, transform.position.y - 3, transform.position.z), Quaternion.identity);
+            Instantiate(slotPrefab, new Vector3(transform.position.x, transform.position.y - 3, transform.position.z), Quaternion.identity);
         }
     }
 
-    public void FetchInfo()
+    void QuickActivation(object sender, EventArgs e)
     {
+        GetComponent<RuneBehaviour>().Activate();
+    }
 
+    public void FailedActivation()
+    {
+        Destroy(gameObject);
+    }
+
+    public Color CheckAdjacentTiles(Vector3 dir)
+    {
+        Color col = Color.gray;
+
+        return col;
     }
 }
