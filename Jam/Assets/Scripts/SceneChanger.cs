@@ -4,11 +4,13 @@ using UnityEngine.SceneManagement;
 public class SceneChanger : MonoBehaviour
 {
     [SerializeField] Animator animator;
+    [SerializeField] AudioSource audioSource;
 
     int sceneToLoad;
-    
+
     public void FadeToScene(int idx)
     {
+        audioSource.Play();
         sceneToLoad = idx;
         animator.SetTrigger("FadeOut");
     }
