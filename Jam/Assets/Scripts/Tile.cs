@@ -5,8 +5,7 @@ using System;
 
 public class Tile : MonoBehaviour
 {
-    [SerializeField] GameObject slotNow;
-    GameObject slotPrevious;
+    public GameObject slotNow;
     [SerializeField] GameObject slotPrefab;
     Color color;
     [SerializeField] GameObject gm;
@@ -52,10 +51,7 @@ public class Tile : MonoBehaviour
 
     public void Colliding(GameObject slot)
     {
-        slotNow.GetComponent<Slot>().EnableCollider();
-        slotPrevious = slotNow;
         slotNow = slot;
-        slotNow.GetComponent<Slot>().DisableCollider();
     }
 
     void OnMouseDown()
@@ -66,8 +62,13 @@ public class Tile : MonoBehaviour
 
     void OnMouseUp()
     {
+        if (slotNow = null)
+        {
+
+        }
         transform.Translate(Vector3.forward * 0.1f);
         StopCoroutine("FollowMouse");
+
         transform.position = slotNow.transform.position;
     }
 

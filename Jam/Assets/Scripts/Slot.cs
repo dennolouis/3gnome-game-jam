@@ -4,23 +4,33 @@ using UnityEngine;
 
 public class Slot : MonoBehaviour
 {
+    public GameObject slottedTile;
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         collision.GetComponent<Tile>().Colliding(gameObject);
     }
 
-    public void KillMe()
+    void KillMe()
     {
         Destroy(gameObject);
     }
 
-    public void DisableCollider()
+    public void slotTile(GameObject tile, GameObject slotToSwapTo)
     {
-        GetComponent<Collider2D>().enabled = false;
-    }
+        if(slottedTile != null)
+        {
+            slottedTile.transform.position = slotToSwapTo.transform.position;
+            slotToSwapTo.GetComponent<Slot>().slottedTile = slottedTile;
 
-    public void EnableCollider()
-    {
-        GetComponent<Collider2D>().enabled = true;
+            tile.transform.position = gameObject.transform.position;
+            slottedTile = tile;
+        }
+
+        else
+        {
+            tile.transform.position = gameObject.transform.position;
+            slottedTile = tile;
+        }
     }
 }

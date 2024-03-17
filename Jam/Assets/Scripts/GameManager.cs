@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     List<GameObject> runeQueu2 = new List<GameObject>();
     List<GameObject> runeQueu3 = new List<GameObject>();
 
+    List<GameObject> chosenRunes = new List<GameObject>();
+
     public event EventHandler activations;
 
     public void EndTurn()
@@ -30,9 +32,30 @@ public class GameManager : MonoBehaviour
             rune.GetComponent<RuneBehaviour>().Activate();
         }
     }
+
+    IEnumerator StartPlacing()
+    {
+        chosenRunes[0] = Instantiate(chosenRunes[0]);
+        while(chosenRunes[0].GetComponent<Tile>().slotNow = null)
+        {
+            yield return null;
+        }
+
+        chosenRunes[1] = Instantiate(chosenRunes[0]);
+        while (chosenRunes[1].GetComponent<Tile>().slotNow = null)
+        {
+            yield return null;
+        }
+
+        chosenRunes[2] = Instantiate(chosenRunes[0]);
+        while (chosenRunes[2].GetComponent<Tile>().slotNow = null)
+        {
+            yield return null;
+        }
+    }
 }
 
-public interface RuneBehaviour
+public interface RuneBehaviour  
 {
     public void Activate()
     {
